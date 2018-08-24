@@ -1,0 +1,807 @@
+module mojo_top (
+    input clk,              // 50MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input cclk,             // configuration clock, AVR ready when high
+    output spi_miso,        // AVR SPI MISO
+    input spi_ss,           // AVR SPI Slave Select
+    input spi_mosi,         // AVR SPI MOSI
+    input spi_sck,          // AVR SPI Clock
+    output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
+    input avr_tx,           // AVR TX (FPGA RX)
+    output avr_rx,          // AVR RX (FPGA TX)
+    input avr_rx_busy,      // AVR RX buffer full
+    input io_button[5],
+    output adafruit
+  ) {
+  
+  sig rst;
+
+  .clk(clk) {
+    button_conditioner select;
+    edge_detector select_edge(#RISE(1), #FALL(0));
+    button_conditioner red_button;
+    edge_detector red_edge(#RISE(1), #FALL(0));
+    button_conditioner green_button;
+    edge_detector green_edge(#RISE(1), #FALL(0));
+    button_conditioner blue_button;
+    edge_detector blue_edge(#RISE(1), #FALL(0));
+    button_conditioner yellow_button;
+    edge_detector yellow_edge(#RISE(1), #FALL(0));
+    reset_conditioner reset_cond;
+    
+    .rst(rst) {
+      fsm state(#INIT(HOLD)) = {HOLD, LEVEL_ONE, CHECK_ONE, LEVEL_TWO, CHECK_TWO, 
+        LEVEL_THREE, CHECK_THREE, LEVEL_FOUR, CHECK_FOUR, ONE_CORRECT, TWO_CORRECT,
+        THREE_CORRECT, FOUR_CORRECT, ONE_WRONG, TWO_WRONG, THREE_WRONG, FOUR_WRONG};
+      led_matrix neoled;
+      register display;
+      dff counter[27];
+      dff cycler[3];
+      dff loaded[3];
+      slider temp;
+    }
+  }
+ 
+  colour_mux4 colour;
+  display_mux8 dsp;
+  lvl_mux4 lvl;
+  alu myAlu;
+  
+  always {
+    // DEFAULT ASSIGNMENTS
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    led = 8h00;             // turn LEDs off
+    spi_miso = bz;          // not using SPI
+    spi_channel = bzzzz;    // not using flags
+    avr_rx = bz;            // not using serial port
+    
+    // BUTTON ASSIGNMENTS
+    select.in = io_button[1];
+    select_edge.in = select.out;
+    red_button.in = io_button[0];
+    red_edge.in = red_button.out;
+    green_button.in = io_button[2];
+    green_edge.in = green_button.out;
+    blue_button.in = io_button[3];
+    blue_edge.in = blue_button.out;
+    yellow_button.in = io_button[4]; 
+    yellow_edge.in = yellow_button.out;
+
+    // LED MATRIX ASSIGNMENTS
+    adafruit = neoled.stream;
+    neoled.data = c{display.out[7], display.out[6], display.out[5], display.out[4], 
+      display.out[3], display.out[2], display.out[1], display.out[0]};
+    
+    // REGISTER ASSIGNMENTS
+    display.data = 8x{{192h0}};
+    display.wr = 0;
+    
+    temp.data = 12b0;
+    temp.wr = 0;
+    
+    // MULTIPLEXER ASSIGNMENTS
+    colour.button = 2b01;
+    dsp.sel = 3b100;
+    lvl.sel = 2b0;
+    
+    // ALU ASSIGNMENT
+    myAlu.alufn = 6b0;
+    myAlu.a = 12b0;
+    myAlu.b = 12b0;
+    
+    counter.d = counter.q + 1;
+    state.d = state.q;
+    
+    case (state.q) {
+      state.HOLD:
+        if (loaded.q == 0) {
+          dsp.sel = 3b100;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_ONE;
+          counter.d = 0;
+          loaded.d = 0;
+        }
+      state.LEVEL_ONE:
+        if (loaded.q == 0) {
+          lvl.sel = 2b00;
+          temp.data = lvl.out;
+          temp.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          if (cycler.q < 6) {
+            dsp.sel = c{0, temp.out[1:0]};
+            display.data = dsp.out;
+            display.wr = 1;
+            temp.wr = 0;
+            loaded.d = 2;
+          } else {
+            state.d = state.CHECK_ONE;
+            cycler.d = 0;
+            loaded.d = 0;
+          }
+        } else if (loaded.q == 2) {
+          if (counter.q[25] == 1) {
+            // shift right by 2 bits
+            myAlu.alufn = 6b100001;
+            myAlu.a = temp.out;
+            myAlu.b = 12b10;
+            temp.data = myAlu.out;
+            display.wr = 0;
+            temp.wr = 1;
+            counter.d = 0;
+            cycler.d = cycler.q + 1;
+            loaded.d = 1;
+          }
+        }
+      state.CHECK_ONE:
+        if (loaded.q == 0) {
+          dsp.sel = 3b111;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          lvl.sel = 2b00;
+          temp.data = lvl.out;
+          display.wr = 0;
+          temp.wr = 1;
+          loaded.d = 2;
+        } else if (loaded.q == 2) {
+          temp.wr = 0;
+          // wait for button input
+          if (blue_edge.out) {
+            colour.button = 2b00;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.ONE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.ONE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (green_edge.out) {
+            colour.button = 2b01;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.ONE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.ONE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (yellow_edge.out) {
+            colour.button = 2b10;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.ONE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.ONE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (red_edge.out) {
+            colour.button = 2b11;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.ONE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.ONE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          }
+        } else {
+          // shift right by 2 bits
+          myAlu.alufn = 6b100001;
+          myAlu.a = temp.out;
+          myAlu.b = 12b10;
+          temp.data = myAlu.out;
+          display.wr = 0;
+          temp.wr = 1;
+          cycler.d = cycler.q + 1;
+          loaded.d = 2;
+        }
+      state.LEVEL_TWO:
+        if (loaded.q == 0) {
+          lvl.sel = 2b01;
+          temp.data = lvl.out;
+          temp.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          if (cycler.q < 6) {
+            dsp.sel = c{0, temp.out[1:0]};
+            display.data = dsp.out;
+            display.wr = 1;
+            temp.wr = 0;
+            loaded.d = 2;
+          } else {
+            state.d = state.CHECK_TWO;
+            cycler.d = 0;
+            loaded.d = 0;
+          }
+        } else if (loaded.q == 2) {
+          if (counter.q[24] == 1) {
+            // shift right by 2 bits
+            myAlu.alufn = 6b100001;
+            myAlu.a = temp.out;
+            myAlu.b = 12b10;
+            temp.data = myAlu.out;
+            display.wr = 0;
+            temp.wr = 1;
+            counter.d = 0;
+            cycler.d = cycler.q + 1;
+            loaded.d = 1;
+          }
+        }
+      state.CHECK_TWO:
+        if (loaded.q == 0) {
+          dsp.sel = 3b111;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          lvl.sel = 2b01;
+          temp.data = lvl.out;
+          display.wr = 0;
+          temp.wr = 1;
+          loaded.d = 2;
+        } else if (loaded.q == 2) {
+          temp.wr = 0;
+          // wait for button input
+          if (blue_edge.out) {
+            colour.button = 2b00;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.TWO_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.TWO_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (green_edge.out) {
+            colour.button = 2b01;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.TWO_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.TWO_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (yellow_edge.out) {
+            colour.button = 2b10;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.TWO_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.TWO_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (red_edge.out) {
+            colour.button = 2b11;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.TWO_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.TWO_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          }
+        } else {
+          // shift right by 2 bits
+          myAlu.alufn = 6b100001;
+          myAlu.a = temp.out;
+          myAlu.b = 12b10;
+          temp.data = myAlu.out;
+          display.wr = 0;
+          temp.wr = 1;
+          cycler.d = cycler.q + 1;
+          loaded.d = 2;
+        }
+      state.LEVEL_THREE:
+        if (loaded.q == 0) {
+          lvl.sel = 2b10;
+          temp.data = lvl.out;
+          temp.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          if (cycler.q < 6) {
+            dsp.sel = c{0, temp.out[1:0]};
+            display.data = dsp.out;
+            display.wr = 1;
+            temp.wr = 0;
+            loaded.d = 2;
+          } else {
+            state.d = state.CHECK_THREE;
+            cycler.d = 0;
+            loaded.d = 0;
+          }
+        } else if (loaded.q == 2) {
+          if (counter.q[23] == 1) {
+            // shift right by 2 bits
+            myAlu.alufn = 6b100001;
+            myAlu.a = temp.out;
+            myAlu.b = 12b10;
+            temp.data = myAlu.out;
+            display.wr = 0;
+            temp.wr = 1;
+            counter.d = 0;
+            cycler.d = cycler.q + 1;
+            loaded.d = 1;
+          }
+        }
+      state.CHECK_THREE:
+        if (loaded.q == 0) {
+          dsp.sel = 3b111;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          lvl.sel = 2b10;
+          temp.data = lvl.out;
+          display.wr = 0;
+          temp.wr = 1;
+          loaded.d = 2;
+        } else if (loaded.q == 2) {
+          temp.wr = 0;
+          // wait for button input
+          if (blue_edge.out) {
+            colour.button = 2b00;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.THREE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.THREE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (green_edge.out) {
+            colour.button = 2b01;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.THREE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.THREE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (yellow_edge.out) {
+            colour.button = 2b10;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.THREE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.THREE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (red_edge.out) {
+            colour.button = 2b11;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.THREE_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.THREE_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          }
+        } else {
+          // shift right by 2 bits
+          myAlu.alufn = 6b100001;
+          myAlu.a = temp.out;
+          myAlu.b = 12b10;
+          temp.data = myAlu.out;
+          display.wr = 0;
+          temp.wr = 1;
+          cycler.d = cycler.q + 1;
+          loaded.d = 2;
+        }
+      state.LEVEL_FOUR:
+        if (loaded.q == 0) {
+          lvl.sel = 2b11;
+          temp.data = lvl.out;
+          temp.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          if (cycler.q < 6) {
+            dsp.sel = c{0, temp.out[1:0]};
+            display.data = dsp.out;
+            display.wr = 1;
+            temp.wr = 0;
+            loaded.d = 2;
+          } else {
+            state.d = state.CHECK_FOUR;
+            cycler.d = 0;
+            loaded.d = 0;
+          }
+        } else if (loaded.q == 2) {
+          if (counter.q[22] == 1) {
+            // shift right by 2 bits
+            myAlu.alufn = 6b100001;
+            myAlu.a = temp.out;
+            myAlu.b = 12b10;
+            temp.data = myAlu.out;
+            display.wr = 0;
+            temp.wr = 1;
+            counter.d = 0;
+            cycler.d = cycler.q + 1;
+            loaded.d = 1;
+          }
+        }
+      state.CHECK_FOUR:
+        if (loaded.q == 0) {
+          dsp.sel = 3b111;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else if (loaded.q == 1) {
+          lvl.sel = 2b11;
+          temp.data = lvl.out;
+          display.wr = 0;
+          temp.wr = 1;
+          loaded.d = 2;
+        } else if (loaded.q == 2) {
+          temp.wr = 0;
+          // wait for button input
+          if (blue_edge.out) {
+            colour.button = 2b00;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.FOUR_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.FOUR_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (green_edge.out) {
+            colour.button = 2b01;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.FOUR_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.FOUR_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (yellow_edge.out) {
+            colour.button = 2b10;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.FOUR_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.FOUR_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          } else if (red_edge.out) {
+            colour.button = 2b11;
+            if (cycler.q < 5) {
+              // compare button input with answer
+              myAlu.alufn = 6b110011;
+              myAlu.a = c{10b0, temp.out[1:0]};
+              myAlu.b = colour.out;
+              if (myAlu.out[0] == 1b1) {
+                dsp.sel = c{0, temp.out[1:0]};
+                display.data = dsp.out;
+                display.wr = 1;
+                loaded.d = 3;
+              } else {
+                state.d = state.FOUR_WRONG;
+                cycler.d = 0;
+                loaded.d = 0;
+              }
+            } else {
+              state.d = state.FOUR_CORRECT;
+              cycler.d = 0;
+              loaded.d = 0;
+            }
+          }
+        } else {
+          // shift right by 2 bits
+          myAlu.alufn = 6b100001;
+          myAlu.a = temp.out;
+          myAlu.b = 12b10;
+          temp.data = myAlu.out;
+          display.wr = 0;
+          temp.wr = 1;
+          cycler.d = cycler.q + 1;
+          loaded.d = 2;
+        }  
+      state.ONE_CORRECT:
+        if (loaded.q == 0) {
+          dsp.sel = 3b101;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_TWO;
+          loaded.d = 0;
+        }
+      state.TWO_CORRECT:
+        if (loaded.q == 0) {
+          dsp.sel = 3b101;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_THREE;
+          loaded.d = 0;
+        }
+      state.THREE_CORRECT:
+        if (loaded.q == 0) {
+          dsp.sel = 3b101;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_FOUR;
+          loaded.d = 0;
+        }
+      state.FOUR_CORRECT:
+        if (loaded.q == 0) {
+          dsp.sel = 3b111;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.HOLD;
+          loaded.d = 0;
+        }
+      state.ONE_WRONG:
+        if (loaded.q == 0) {
+          dsp.sel = 3b110;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_ONE;
+          loaded.d = 0;
+        }
+      state.TWO_WRONG:
+        if (loaded.q == 0) {
+          dsp.sel = 3b110;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_TWO;
+          loaded.d = 0;
+        }
+      state.THREE_WRONG:
+        if (loaded.q == 0) {
+          dsp.sel = 3b110;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_THREE;
+          loaded.d = 0;
+        }
+      state.FOUR_WRONG:
+        if (loaded.q == 0) {
+          dsp.sel = 3b110;
+          display.data = dsp.out;
+          display.wr = 1;
+          loaded.d = 1;
+        } else {
+          display.wr = 0;
+        }
+        if (select_edge.out) {
+          state.d = state.LEVEL_FOUR;
+          loaded.d = 0;
+        }
+    }
+  }
+}

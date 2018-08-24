@@ -1,0 +1,34 @@
+module led_matrix (
+    input clk,  // clock
+    input rst,  // reset
+    input data[1536], 
+    output stream
+  ) {
+  
+  dff transfer_time[17](.clk(clk), .rst(rst));
+  var i;  
+  
+  always {
+    transfer_time.d = transfer_time.q + 1;
+    i = transfer_time.q / 64;
+    
+    if (transfer_time.q < 98304) {
+      if (data[i] == 1b1) {
+        if (transfer_time.q[5:0] > 46) {
+          stream = 1b0;
+        } else {
+          stream = 1b1;
+        }
+      } else if (data[i] == 1b0) {
+        if (transfer_time.q[5:0] > 18) {
+          stream = 1b0;
+        } else {
+          stream = 1b1;
+        }
+      }
+    } else {
+      stream = 1b0;
+    }
+  } 
+}
+

@@ -1,0 +1,43 @@
+module adder (
+    input a[12],      
+    input b[12],      
+    input alufn[2],  // ALUFN[0] signals
+    output s[192],     
+    output z,        // zero
+    output v,        // overflow
+    output n         // negative    
+  ) {
+  
+  sig xs[12];
+
+  always {
+    s = $signed(12b0);
+    z = 1b0;
+    v = 1b0;
+    n = 1b0;    
+    
+    case (alufn) {
+      // ADDITION
+      2b00:       
+        s = $signed(a) + $signed(b);
+        xs = $signed(a) + $signed(b);
+        z = ~(|xs); 
+        v = (a[11] && b[11] && ~(xs[11])) || (~(a[11]) && ~(b[11]) && xs[11]);
+        n = xs[11];
+      // SUBTRACTION 
+      2b01: 
+        s = $signed(a) - $signed(b);
+        xs = $signed(a) - $signed(b);
+        z = ~(|xs); 
+        v = (a[11] && b[11] && ~(xs[11])) || (~(a[11]) && ~(b[11]) && xs[11]);
+        n = xs[11];
+      // MULTIPLICATION              
+      2b10:
+        s = $signed(a) * $signed(b);
+        xs = $signed(a) * $signed(b);
+        z = ~(|xs); 
+        v = (a[11] && b[11] && ~(xs[11])) || (~(a[11]) && ~(b[11]) && xs[11]);
+        n = xs[11];
+    }
+  }
+}

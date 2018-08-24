@@ -1,0 +1,53 @@
+module alu (
+    input a[12], 
+    input b[12], 
+    input alufn[6],   // ALUFN0 - ALUFN5 signals
+    output out[12],  // final ALU output
+    output z,         // zero
+    output v,         // overflow
+    output n          // negative
+  ) {
+  
+  adder adder;
+  boolean boolean;
+  shifter shifter;
+  compare compare;
+  
+  always {
+    out = 12b0;
+    
+    adder.a = $signed(a);
+    adder.b = $signed(b);
+    adder.alufn = alufn[1:0];
+    
+    boolean.a = $signed(a);
+    boolean.b = $signed(b);
+    boolean.alufn = alufn[3:0];
+    
+    shifter.a = $signed(a);
+    shifter.b = $signed(b);
+    shifter.alufn = alufn[1:0];
+    
+    compare.a = $signed(a);
+    compare.b = $signed(b);
+    compare.alufn = alufn[2:1];
+    
+    z = 1b0;
+    v = 1b0;
+    n = 1b0;
+    
+    case (alufn[5:4]) {
+      2b00:
+        out = $signed(adder.s);
+        z = adder.z;
+        v = adder.v;
+        n = adder.n;
+      2b01:
+        out = boolean.boole;
+      2b10:
+        out = shifter.shift;
+      2b11:
+        out = compare.cmp;
+    }
+  }
+}

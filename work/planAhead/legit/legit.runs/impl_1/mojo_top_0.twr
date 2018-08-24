@@ -1,0 +1,1940 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+D:\14.7\ISE_DS\ISE\bin\nt\unwrapped\trce.exe -intstyle ise -o mojo_top_0.twr -v
+30 -l 30 mojo_top_0_routed.ncd mojo_top_0.pcf
+
+Design file:              mojo_top_0_routed.ncd
+Physical constraint file: mojo_top_0.pcf
+Device,package,speed:     xc6slx9,tqg144,C,-2 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report, limited to 30 items per constraint
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 536990 paths analyzed, 900 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is  12.333ns.
+--------------------------------------------------------------------------------
+Slack:                  7.667ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.206ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     12.206ns (2.866ns logic, 9.340ns route)
+                                                       (23.5% logic, 76.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.708ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.164ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     12.164ns (2.866ns logic, 9.298ns route)
+                                                       (23.6% logic, 76.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.732ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.141ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     12.141ns (2.789ns logic, 9.352ns route)
+                                                       (23.0% logic, 77.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.773ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.099ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     12.099ns (2.789ns logic, 9.310ns route)
+                                                       (23.1% logic, 76.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.833ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_8 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.039ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_8 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y48.AQ      Tcko                  0.476   green_button/M_ctr_q[11]
+                                                       green_button/M_ctr_q_8
+    SLICE_X11Y48.A6      net (fanout=2)        0.608   green_button/M_ctr_q[8]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     12.039ns (2.866ns logic, 9.173ns route)
+                                                       (23.8% logic, 76.2% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.857ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_685 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      12.016ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_685
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.B4       net (fanout=7)        1.501   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<685>1
+                                                       display/M_reg_q_685
+    -------------------------------------------------  ---------------------------
+    Total                                     12.016ns (2.866ns logic, 9.150ns route)
+                                                       (23.9% logic, 76.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.884ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.989ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.COUT     Tbyp                  0.093   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X8Y31.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+    SLICE_X8Y31.BMUX     Tcinb                 0.310   M_adder_n
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_xor<11>
+    SLICE_X9Y31.A2       net (fanout=1)        0.771   myAlu/a[11]_b[11]_sub_5_OUT[9]
+    SLICE_X9Y31.A        Tilo                  0.259   M_state_q_FSM_FFd3_2
+                                                       myAlu/Mmux_out27_SW0
+    SLICE_X4Y32.B4       net (fanout=13)       0.895   N51
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.989ns (3.049ns logic, 8.940ns route)
+                                                       (25.4% logic, 74.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.888ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_10 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.984ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_10 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y48.CQ      Tcko                  0.476   green_button/M_ctr_q[11]
+                                                       green_button/M_ctr_q_10
+    SLICE_X11Y48.A2      net (fanout=2)        0.553   green_button/M_ctr_q[10]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.984ns (2.866ns logic, 9.118ns route)
+                                                       (23.9% logic, 76.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.898ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_8 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.974ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_8 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y48.AQ      Tcko                  0.476   green_button/M_ctr_q[11]
+                                                       green_button/M_ctr_q_8
+    SLICE_X11Y48.A6      net (fanout=2)        0.608   green_button/M_ctr_q[8]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.974ns (2.789ns logic, 9.185ns route)
+                                                       (23.3% logic, 76.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.898ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_685 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.974ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_685
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.B4       net (fanout=7)        1.501   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<685>1
+                                                       display/M_reg_q_685
+    -------------------------------------------------  ---------------------------
+    Total                                     11.974ns (2.866ns logic, 9.108ns route)
+                                                       (23.9% logic, 76.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.899ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_14 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.973ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_14 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.CQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_14
+    SLICE_X11Y48.D1      net (fanout=2)        0.725   green_button/M_ctr_q[14]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.973ns (2.866ns logic, 9.107ns route)
+                                                       (23.9% logic, 76.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.922ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_685 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.951ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_685
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.B4       net (fanout=7)        1.501   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<685>1
+                                                       display/M_reg_q_685
+    -------------------------------------------------  ---------------------------
+    Total                                     11.951ns (2.789ns logic, 9.162ns route)
+                                                       (23.3% logic, 76.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.925ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.947ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.COUT     Tbyp                  0.093   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X8Y31.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+    SLICE_X8Y31.BMUX     Tcinb                 0.310   M_adder_n
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_xor<11>
+    SLICE_X9Y31.A2       net (fanout=1)        0.771   myAlu/a[11]_b[11]_sub_5_OUT[9]
+    SLICE_X9Y31.A        Tilo                  0.259   M_state_q_FSM_FFd3_2
+                                                       myAlu/Mmux_out27_SW0
+    SLICE_X4Y32.B4       net (fanout=13)       0.895   N51
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.947ns (3.049ns logic, 8.898ns route)
+                                                       (25.5% logic, 74.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.928ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.945ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y45.D5       net (fanout=3)        0.242   M_green_button_out
+    SLICE_X7Y45.D        Tilo                  0.259   M_last_q_1
+                                                       Mmux_M_myAlu_b43
+    SLICE_X4Y33.B4       net (fanout=1)        1.244   Mmux_M_myAlu_b42
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.COUT     Topcyb                0.483   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.945ns (3.096ns logic, 8.849ns route)
+                                                       (25.9% logic, 74.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.949ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_12 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.923ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_12 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.AQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_12
+    SLICE_X11Y48.A4      net (fanout=2)        0.492   green_button/M_ctr_q[12]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.923ns (2.866ns logic, 9.057ns route)
+                                                       (24.0% logic, 76.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.953ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_10 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.919ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_10 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y48.CQ      Tcko                  0.476   green_button/M_ctr_q[11]
+                                                       green_button/M_ctr_q_10
+    SLICE_X11Y48.A2      net (fanout=2)        0.553   green_button/M_ctr_q[10]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.919ns (2.789ns logic, 9.130ns route)
+                                                       (23.4% logic, 76.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.963ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_685 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.909ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_685
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.B4       net (fanout=7)        1.501   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<685>1
+                                                       display/M_reg_q_685
+    -------------------------------------------------  ---------------------------
+    Total                                     11.909ns (2.789ns logic, 9.120ns route)
+                                                       (23.4% logic, 76.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.964ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_14 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.908ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_14 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.CQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_14
+    SLICE_X11Y48.D1      net (fanout=2)        0.725   green_button/M_ctr_q[14]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.908ns (2.789ns logic, 9.119ns route)
+                                                       (23.4% logic, 76.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.969ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.903ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y45.D5       net (fanout=3)        0.242   M_green_button_out
+    SLICE_X7Y45.D        Tilo                  0.259   M_last_q_1
+                                                       Mmux_M_myAlu_b43
+    SLICE_X4Y33.B4       net (fanout=1)        1.244   Mmux_M_myAlu_b42
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.COUT     Topcyb                0.483   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.903ns (3.096ns logic, 8.807ns route)
+                                                       (26.0% logic, 74.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.969ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.904ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y45.D5       net (fanout=3)        0.242   M_green_button_out
+    SLICE_X7Y45.D        Tilo                  0.259   M_last_q_1
+                                                       Mmux_M_myAlu_b43
+    SLICE_X4Y33.B4       net (fanout=1)        1.244   Mmux_M_myAlu_b42
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.CMUX     Topbc                 0.650   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.904ns (3.043ns logic, 8.861ns route)
+                                                       (25.6% logic, 74.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.981ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               red_button/M_ctr_q_3 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.953ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.031ns (0.714 - 0.745)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: red_button/M_ctr_q_3 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y34.DQ      Tcko                  0.476   red_button/M_ctr_q[3]
+                                                       red_button/M_ctr_q_3
+    SLICE_X11Y36.A1      net (fanout=2)        0.916   red_button/M_ctr_q[3]
+    SLICE_X11Y36.A       Tilo                  0.259   N99
+                                                       red_button/out1
+    SLICE_X8Y37.A3       net (fanout=3)        0.792   out_2
+    SLICE_X8Y37.A        Tilo                  0.254   M_last_q_3
+                                                       red_button/out4
+    SLICE_X7Y37.B4       net (fanout=6)        0.819   M_red_button_out
+    SLICE_X7Y37.B        Tilo                  0.259   M_last_q
+                                                       Mmux_M_myAlu_b42
+    SLICE_X4Y33.B2       net (fanout=1)        0.978   Mmux_M_myAlu_b41
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.COUT     Topcyb                0.483   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.953ns (3.091ns logic, 8.862ns route)
+                                                       (25.9% logic, 74.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.993ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.880ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.DMUX     Taxd                  0.438   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B5       net (fanout=1)        0.695   myAlu/a[11]_b[11]_sub_5_OUT[3]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.880ns (2.836ns logic, 9.044ns route)
+                                                       (23.9% logic, 76.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  7.994ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.879ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.DMUX     Tcind                 0.320   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y31.A1       net (fanout=1)        0.747   myAlu/a[11]_b[11]_sub_5_OUT[7]
+    SLICE_X9Y31.A        Tilo                  0.259   M_state_q_FSM_FFd3_2
+                                                       myAlu/Mmux_out27_SW0
+    SLICE_X4Y32.B4       net (fanout=13)       0.895   N51
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.879ns (2.966ns logic, 8.913ns route)
+                                                       (25.0% logic, 75.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.004ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.869ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.BMUX     Taxb                  0.292   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B3       net (fanout=1)        0.830   myAlu/a[11]_b[11]_sub_5_OUT[1]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.869ns (2.690ns logic, 9.179ns route)
+                                                       (22.7% logic, 77.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.007ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_16 (FF)
+  Destination:          display/M_reg_q_653 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.866ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.092ns (0.714 - 0.806)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_16 to display/M_reg_q_653
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y50.AQ      Tcko                  0.476   green_button/M_ctr_q[19]
+                                                       green_button/M_ctr_q_16
+    SLICE_X11Y48.D2      net (fanout=2)        0.958   green_button/M_ctr_q[16]
+    SLICE_X11Y48.D       Tilo                  0.259   out1_1
+                                                       green_button/out2
+    SLICE_X7Y45.C1       net (fanout=2)        1.048   out1_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X6Y22.C5       net (fanout=7)        1.375   M_dsp_sel[0]
+    SLICE_X6Y22.CLK      Tas                   0.349   M_display_out[661]
+                                                       M_display_data<653>1
+                                                       display/M_reg_q_653
+    -------------------------------------------------  ---------------------------
+    Total                                     11.866ns (2.842ns logic, 9.024ns route)
+                                                       (24.0% logic, 76.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.010ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.862ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y45.D5       net (fanout=3)        0.242   M_green_button_out
+    SLICE_X7Y45.D        Tilo                  0.259   M_last_q_1
+                                                       Mmux_M_myAlu_b43
+    SLICE_X4Y33.B4       net (fanout=1)        1.244   Mmux_M_myAlu_b42
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.CMUX     Topbc                 0.650   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.862ns (3.043ns logic, 8.819ns route)
+                                                       (25.7% logic, 74.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.014ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_12 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.858ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_12 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.AQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_12
+    SLICE_X11Y48.A4      net (fanout=2)        0.492   green_button/M_ctr_q[12]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.CMUX     Taxc                  0.391   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.858ns (2.789ns logic, 9.069ns route)
+                                                       (23.5% logic, 76.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.022ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               red_button/M_ctr_q_3 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.912ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.031ns (0.714 - 0.745)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: red_button/M_ctr_q_3 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y34.DQ      Tcko                  0.476   red_button/M_ctr_q[3]
+                                                       red_button/M_ctr_q_3
+    SLICE_X11Y36.A1      net (fanout=2)        0.916   red_button/M_ctr_q[3]
+    SLICE_X11Y36.A       Tilo                  0.259   N99
+                                                       red_button/out1
+    SLICE_X8Y37.A3       net (fanout=3)        0.792   out_2
+    SLICE_X8Y37.A        Tilo                  0.254   M_last_q_3
+                                                       red_button/out4
+    SLICE_X7Y37.B4       net (fanout=6)        0.819   M_red_button_out
+    SLICE_X7Y37.B        Tilo                  0.259   M_last_q
+                                                       Mmux_M_myAlu_b42
+    SLICE_X4Y33.B2       net (fanout=1)        0.978   Mmux_M_myAlu_b41
+    SLICE_X4Y33.B        Tilo                  0.254   myAlu/Mmux_out2
+                                                       Mmux_M_myAlu_b44
+    SLICE_X8Y29.B2       net (fanout=11)       1.594   M_myAlu_b[1]
+    SLICE_X8Y29.CMUX     Topbc                 0.650   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_lut<1>
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B2       net (fanout=1)        1.003   myAlu/a[11]_b[11]_sub_5_OUT[2]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.912ns (3.038ns logic, 8.874ns route)
+                                                       (25.5% logic, 74.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.023ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_8 (FF)
+  Destination:          display/M_reg_q_685 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.849ns (Levels of Logic = 9)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_8 to display/M_reg_q_685
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y48.AQ      Tcko                  0.476   green_button/M_ctr_q[11]
+                                                       green_button/M_ctr_q_8
+    SLICE_X11Y48.A6      net (fanout=2)        0.608   green_button/M_ctr_q[8]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.COUT     Taxcy                 0.248   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X8Y30.CIN      net (fanout=1)        0.003   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+    SLICE_X8Y30.AMUX     Tcina                 0.220   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[7]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<7>
+    SLICE_X9Y32.B1       net (fanout=1)        0.988   myAlu/a[11]_b[11]_sub_5_OUT[4]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.B4       net (fanout=7)        1.501   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<685>1
+                                                       display/M_reg_q_685
+    -------------------------------------------------  ---------------------------
+    Total                                     11.849ns (2.866ns logic, 8.983ns route)
+                                                       (24.2% logic, 75.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  8.034ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               green_button/M_ctr_q_13 (FF)
+  Destination:          display/M_reg_q_662 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      11.838ns (Levels of Logic = 8)
+  Clock Path Skew:      -0.093ns (0.714 - 0.807)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: green_button/M_ctr_q_13 to display/M_reg_q_662
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y49.BQ      Tcko                  0.476   green_button/M_ctr_q[15]
+                                                       green_button/M_ctr_q_13
+    SLICE_X11Y48.A1      net (fanout=2)        0.733   green_button/M_ctr_q[13]
+    SLICE_X11Y48.A       Tilo                  0.259   out1_1
+                                                       green_button/out3
+    SLICE_X7Y45.C2       net (fanout=2)        1.231   out2_1
+    SLICE_X7Y45.C        Tilo                  0.259   M_last_q_1
+                                                       green_button/out4
+    SLICE_X7Y34.A2       net (fanout=3)        1.616   M_green_button_out
+    SLICE_X7Y34.A        Tilo                  0.259   N61
+                                                       M_state_q_FSM_FFd1-In1_SW0
+    SLICE_X7Y34.C2       net (fanout=7)        0.545   N11
+    SLICE_X7Y34.C        Tilo                  0.259   N61
+                                                       Mmux_M_myAlu_a11
+    SLICE_X8Y29.AX       net (fanout=2)        1.410   M_myAlu_a[0]
+    SLICE_X8Y29.DMUX     Taxd                  0.438   myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy[3]
+                                                       myAlu/compare/adder/Msub_a[11]_b[11]_sub_5_OUT_cy<3>
+    SLICE_X9Y32.B5       net (fanout=1)        0.695   myAlu/a[11]_b[11]_sub_5_OUT[3]
+    SLICE_X9Y32.B        Tilo                  0.259   Mmux_M_temp_data54
+                                                       myAlu/Mmux_out24
+    SLICE_X4Y32.B2       net (fanout=13)       1.081   Mmux_out23
+    SLICE_X4Y32.B        Tilo                  0.254   M_dsp_sel[0]
+                                                       Mmux_M_dsp_sel11
+    SLICE_X7Y22.A2       net (fanout=7)        1.691   M_dsp_sel[0]
+    SLICE_X7Y22.CLK      Tas                   0.373   M_display_out[797]
+                                                       M_display_data<662>1
+                                                       display/M_reg_q_662
+    -------------------------------------------------  ---------------------------
+    Total                                     11.838ns (2.836ns logic, 9.002ns route)
+                                                       (24.0% logic, 76.0% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 17.334ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 2.666ns (375.094MHz) (Tbcper_I)
+  Physical resource: clk_BUFGP/BUFG/I0
+  Logical resource: clk_BUFGP/BUFG/I0
+  Location pin: BUFGMUX_X2Y11.I0
+  Clock network: clk_BUFGP/IBUFG
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: green_button/M_sync_out/CLK
+  Logical resource: yellow_button/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y54.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: green_button/M_sync_out/CLK
+  Logical resource: red_button/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y54.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: green_button/M_sync_out/CLK
+  Logical resource: blue_button/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y54.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: green_button/M_sync_out/CLK
+  Logical resource: select/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y54.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: green_button/M_sync_out/CLK
+  Logical resource: green_button/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y54.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[3]/CLK
+  Logical resource: blue_button/M_ctr_q_0/CK
+  Location pin: SLICE_X4Y43.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[3]/CLK
+  Logical resource: blue_button/M_ctr_q_1/CK
+  Location pin: SLICE_X4Y43.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[3]/CLK
+  Logical resource: blue_button/M_ctr_q_2/CK
+  Location pin: SLICE_X4Y43.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[3]/CLK
+  Logical resource: blue_button/M_ctr_q_3/CK
+  Location pin: SLICE_X4Y43.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[7]/CLK
+  Logical resource: blue_button/M_ctr_q_4/CK
+  Location pin: SLICE_X4Y44.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[7]/CLK
+  Logical resource: blue_button/M_ctr_q_5/CK
+  Location pin: SLICE_X4Y44.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[7]/CLK
+  Logical resource: blue_button/M_ctr_q_6/CK
+  Location pin: SLICE_X4Y44.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[7]/CLK
+  Logical resource: blue_button/M_ctr_q_7/CK
+  Location pin: SLICE_X4Y44.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[11]/CLK
+  Logical resource: blue_button/M_ctr_q_8/CK
+  Location pin: SLICE_X4Y45.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[11]/CLK
+  Logical resource: blue_button/M_ctr_q_9/CK
+  Location pin: SLICE_X4Y45.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[11]/CLK
+  Logical resource: blue_button/M_ctr_q_10/CK
+  Location pin: SLICE_X4Y45.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[11]/CLK
+  Logical resource: blue_button/M_ctr_q_11/CK
+  Location pin: SLICE_X4Y45.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[15]/CLK
+  Logical resource: blue_button/M_ctr_q_12/CK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[15]/CLK
+  Logical resource: blue_button/M_ctr_q_13/CK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[15]/CLK
+  Logical resource: blue_button/M_ctr_q_14/CK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[15]/CLK
+  Logical resource: blue_button/M_ctr_q_15/CK
+  Location pin: SLICE_X4Y46.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[19]/CLK
+  Logical resource: blue_button/M_ctr_q_16/CK
+  Location pin: SLICE_X4Y47.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[19]/CLK
+  Logical resource: blue_button/M_ctr_q_17/CK
+  Location pin: SLICE_X4Y47.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[19]/CLK
+  Logical resource: blue_button/M_ctr_q_18/CK
+  Location pin: SLICE_X4Y47.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: blue_button/M_ctr_q[19]/CLK
+  Logical resource: blue_button/M_ctr_q_19/CK
+  Location pin: SLICE_X4Y47.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: select/M_ctr_q[3]/CLK
+  Logical resource: select/M_ctr_q_0/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: select/M_ctr_q[3]/CLK
+  Logical resource: select/M_ctr_q_1/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: select/M_ctr_q[3]/CLK
+  Logical resource: select/M_ctr_q_2/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: select/M_ctr_q[3]/CLK
+  Logical resource: select/M_ctr_q_3/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |   12.333|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 536990 paths, 0 nets, and 1360 connections
+
+Design statistics:
+   Minimum period:  12.333ns{1}   (Maximum frequency:  81.083MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Fri Dec 08 17:00:32 2017 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 173 MB
+
+
+

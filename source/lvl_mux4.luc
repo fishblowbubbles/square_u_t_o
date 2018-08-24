@@ -1,0 +1,16 @@
+module lvl_mux4 (
+    input sel[2],
+    output out[12]
+  ) {
+
+  always {
+    out = 0;
+    
+    case (sel) {
+      2b00: out = 12b011110000100;  // level 1
+      2b01: out = 12b001011010011;  // level 2
+      2b10: out = 12b101100011001;  // level 3
+      2b11: out = 12b101001000110;  // level 4
+    }    
+  }
+}

@@ -1,0 +1,20 @@
+module slider #(WIDTH=12)(
+    input clk,  // clock
+    input rst,  // reset
+    input wr,
+    input data[WIDTH],
+    output out[WIDTH]
+  ) {
+  
+  dff reg[WIDTH](.clk(clk), .rst(rst));
+   
+  always {
+    if (wr == 1) {
+      reg.d = data;
+    } else {
+      reg.d = reg.q;
+    }
+    
+    out = reg.q;
+  }
+}

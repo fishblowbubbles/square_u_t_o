@@ -1,0 +1,16 @@
+module colour_mux4 (
+    input button[2],
+    output out[12]
+  ) {
+
+  always {
+    out = 12b0;
+    
+    case (button) {
+      2b00: out = 12b00;  // blue
+      2b01: out = 12b01;  // green
+      2b10: out = 12b10;  // yellow
+      2b11: out = 12b11;  // red
+    }
+  }
+}

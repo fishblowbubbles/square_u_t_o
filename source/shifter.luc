@@ -1,0 +1,18 @@
+module shifter (
+    input a[12],      
+    input b[12],      
+    input alufn[2],    // ALUFN[1:0] signals
+    output shift[12] 
+  ) {
+  
+  always {
+    shift = 12b0;
+    
+    case (alufn) {
+      2b00: shift = $signed(a) << b[2:0];   // shift left
+      2b01: shift = $signed(a) >> b[2:0];   // shift right
+      2b10: shift = $signed(a) <<< b[2:0];  // shift left with sign extension
+      2b11: shift = $signed(a) >>> b[2:0];  // shift right with sign extension
+    }
+  }
+}

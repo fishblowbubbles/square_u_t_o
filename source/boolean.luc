@@ -1,0 +1,22 @@
+module boolean (
+    input a[12],      
+    input b[12],      
+    input alufn[4],    // ALUFN[3:0] signals
+    output boole[12]  
+  ) {
+  
+  always {
+    boole = 12b0;
+    
+    case (alufn) {
+      4b1000: boole = a & b;     // and operation
+      4b1110: boole = a | b;     // or operation
+      4b0110: boole = a ^ b;     // xor operation
+      4b0111: boole = ~(a & b);  // nand operation
+      4b0001: boole = ~(a | b);  // nor operation
+      4b1001: boole = ~(a ^ b);  // xnor operation
+      4b0101: boole = ~a;        // inverter 
+      4b1010: boole = a;         // ldr
+    }
+  }
+}

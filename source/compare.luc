@@ -1,0 +1,23 @@
+module compare (
+    input a[12],      
+    input b[12],      
+    input alufn[2],  // ALUFN[2:0] signals
+    output cmp[12]  
+  ) {
+  
+  adder adder;
+    
+  always {
+    cmp = 12b0;
+
+    adder.a = $signed(a);
+    adder.b = $signed(b);
+    adder.alufn[1:0] = 2b01;
+    
+    case (alufn) {
+      2b01: cmp[0] = adder.z;                        // a == b
+      2b10: cmp[0] = adder.n ^ adder.v;              // a < b
+      2b11: cmp[0] = (adder.n ^ adder.v) | adder.z;  // a <= b
+    }
+  }
+}
